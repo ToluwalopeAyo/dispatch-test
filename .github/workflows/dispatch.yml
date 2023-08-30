@@ -1,0 +1,31 @@
+name: Repository Dispatch Test
+
+on:
+  push:
+    branches:
+      - main
+env:
+  EVENT_NAME: dispatch
+  GOERLI: apps/dummy-dev/overlays/dummy-dev-1/config.yaml
+  GOERLI2: apps/dummy-dev/overlays/dummy-dev-2/config.yaml
+  TESTNET:  apps/dummy-dev/overlays/dummy-dev-3/config.yaml
+  MAINNET: apps/dummy-dev/overlays/dummy-dev-4/config.yaml
+  
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  dispatch_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository Dispatch test
+        env:
+          IMAGE_TAG: ${{ github.sha }}
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          repository: 
+          event-type: ${{ env.EVENT_NAME }}
+          client-payload: '{"name": "${{ env.EVENT_NAME }}", "goerli_config": "${{ env.GOERLI }}", "goerli2_config": "${{ env.GOERLI2 }}", "testnet_config": "${{ env.TESTNET }}", "mainnet_config": "${{ env.MAINNET }}", "tag": "${{ env.IMAGE_TAG }}"}'
