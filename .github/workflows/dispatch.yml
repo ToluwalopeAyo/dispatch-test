@@ -3,7 +3,8 @@ name: Repository Dispatch Test
 on:
   push:
     branches:
-      - main
+      - master
+
 env:
   EVENT_NAME: dispatch
   GOERLI: apps/dummy-dev/overlays/dummy-dev-1/config.yaml
