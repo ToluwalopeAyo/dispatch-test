@@ -41,6 +41,6 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: token ${{ secrets.ACCESS_TOKEN }}" \
           -H "X-GitHub-Api-Version: 2022-11-28" \
-          https://api.github.com/repos/ToluwalopeAyo/dispatch-test/dispatches \
+          https://api.github.com/repos/ToluwalopeAyo/update-image-test/dispatches \
           -d '{"event_type": "${{ env.EVENT_NAME }}", "client_payload":{"name": "${{ env.EVENT_NAME }}", "goerli_config": "${{ env.GOERLI }}", "goerli2_config": "${{ env.GOERLI2 }}", "testnet_config": "${{ env.TESTNET }}", "mainnet_config": "${{ env.MAINNET }}", "tag": "${{ env.IMAGE_TAG }}"}}'
 
