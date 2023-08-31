@@ -7,10 +7,10 @@ on:
 
 env: 
   EVENT_NAME: dispatch
-  GOERLI: apps/dummy-dev/overlays/dummy-dev-1/config.yaml
-  GOERLI2: apps/dummy-dev/overlays/dummy-dev-2/config.yaml
-  TESTNET:  apps/dummy-dev/overlays/dummy-dev-3/config.yaml
-  MAINNET: apps/dummy-dev/overlays/dummy-dev-4/config.yaml
+  GOERLI: /apps/dummy-dev/overlays/dummy-dev-1/config.yaml
+  GOERLI2: /apps/dummy-dev/overlays/dummy-dev-2/config.yaml
+  TESTNET:  /apps/dummy-dev/overlays/dummy-dev-3/config.yaml
+  MAINNET: /apps/dummy-dev/overlays/dummy-dev-4/config.yaml
   
 permissions:
   id-token: write
