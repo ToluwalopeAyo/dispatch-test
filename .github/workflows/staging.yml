@@ -30,7 +30,11 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       
       - name: Docker pull, tag and push
+        env:
+          IMAGE_TAG: ${{ github.event.inputs.tag }}
         run: |
           docker pull tolulopeayo/hng-api:1
+          docker tag tolulopeayo/hng-api:1 tolulopeayo/hnggg-apii:${{ env.IMAGE_TAG }}
+          docker push tolulopeayo/hnggg-apii:${{ env.IMAGE_TAG }}
 
       
