@@ -29,14 +29,8 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       
-      - name: Sync from nginx to Tolulope
-        env:
-          IMAGE_TAG: ${{ github.event.inputs.tag }}
-        uses: onichandame/docker-registry-sync-action@master
-        with: 
-          source_repository: tolulopeayo/hng-api:1
-          source_username: ${{ secrets.DOCKER_USERNAME }}
-          source_password: ${{ secrets.DOCKER_PASSWORD }}
-          target_repository: tolulopeayo/hngg-apii:${{ env.IMAGE_TAG }}
-          target_username: ${{ secrets.DOCKER_USERNAME }}
-          target_password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Docker pull, tag and push
+        run: |
+          docker pull tolulopeayo/hng-api:1
+
+      
