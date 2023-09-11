@@ -9,7 +9,7 @@ jobs:
   docker_build_and_publish:
     runs-on: ubuntu-latest
     outputs: 
-      DOCKER_IMAGE_TAG: ${{ steps.image_tag.outputs.DOCKER_IMAGE_TAG }}
+      IMAGE_TAG: ${{ steps.image_tag.outputs.DOCKER_IMAGE_TAG }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -48,10 +48,14 @@ jobs:
     environment: 
       name: Development
     steps:
+      - env:
+          IMAGE_TAG: ${{ needs.docker_build_and_publish.outputs.IMAGE_TAG }}
+        run: echo "$IMAGE_TAG"
+
       - name: Repository Dispatch Dev
         env:
           EVENT_NAME: dispatch
-          IMAGE_TAG: ${{ needs.docker_build_and_publish.outputs.DOCKER_IMAGE_TAG }}
+          IMAGE_TAG: ${{ needs.docker_build_and_publish.outputs.IMAGE_TAG }}
           GOERLI: apps/dummy-dev/overlays/dummy-dev-1/config.yml
           GOERLI2: apps/dummy-dev/overlays/dummy-dev-2/config.yml
           TESTNET: apps/dummy-dev/overlays/dummy-dev-3/config.yml
