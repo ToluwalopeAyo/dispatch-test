@@ -8,13 +8,15 @@ on:
 jobs:
   docker_build_and_publish:
     runs-on: ubuntu-latest
+    outputs: 
+      DOCKER_IMAGE_TAG: ${{ steps.Define_docker_image_tag.outputs.tag }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
         
-      - name: Define docker image tag
+      - name: Define_docker_image_tag
         run: |
           echo "DOCKER_IMAGE_TAG=$(git describe --tags)" >> $GITHUB_ENV
           echo $DOCKER_IMAGE_TAG
@@ -48,7 +50,7 @@ jobs:
       - name: Repository Dispatch Dev
         env:
           EVENT_NAME: dispatch
-          IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
+          IMAGE_TAG: ${{ needs.docker_build_and_publish.outputs.DOCKER_IMAGE_TAG }}
           GOERLI: apps/dummy-dev/overlays/dummy-dev-1/config.yml
           GOERLI2: apps/dummy-dev/overlays/dummy-dev-2/config.yml
           TESTNET: apps/dummy-dev/overlays/dummy-dev-3/config.yml
