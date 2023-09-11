@@ -15,7 +15,9 @@ jobs:
           fetch-depth: 0
         
       - name: Define docker image tag
-        run: echo "DOCKER_IMAGE_TAG=$(git describe --tags)" >> $GITHUB_ENV
+        run: |
+          echo "DOCKER_IMAGE_TAG=$(git describe --tags)" >> $GITHUB_ENV
+          echo $DOCKER_IMAGE_TAG
 
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -59,7 +61,7 @@ jobs:
           -H "X-GitHub-Api-Version: 2022-11-28" \
           https://api.github.com/repos/ToluwalopeAyo/update-image-test/dispatches \
           -d '{"event_type": "${{ env.EVENT_NAME }}", "client_payload":{"name": "${{ env.EVENT_NAME }}", "goerli_config": "${{ env.GOERLI }}", "goerli2_config": "${{ env.GOERLI2 }}", "testnet_config": "${{ env.TESTNET }}", "mainnet_config": "${{ env.MAINNET }}", "tag": "${{ env.IMAGE_TAG }}"}}'
-          
+
   deploy_to_staging:
     permissions: 
       id-token: write
