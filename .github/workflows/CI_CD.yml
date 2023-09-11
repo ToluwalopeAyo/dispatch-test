@@ -4,6 +4,7 @@ on:
   push:
     branches: [master]
 
+    
 jobs:
   docker_build_and_publish:
     runs-on: ubuntu-latest
