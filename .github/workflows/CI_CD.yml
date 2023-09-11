@@ -47,7 +47,7 @@ jobs:
     steps:
       - name: Repository Dispatch Dev
         env:
-          EVENT_NAME: juno-dev
+          EVENT_NAME: dispatch
           IMAGE_TAG: ${{ env.DOCKER_IMAGE_TAG }}
           GOERLI: apps/dummy-dev/overlays/dummy-dev-1/config.yml
           GOERLI2: apps/dummy-dev/overlays/dummy-dev-2/config.yml
@@ -73,7 +73,7 @@ jobs:
     steps:
       - name: Repository Dispatch Dev
         env:
-          EVENT_NAME: juno-dev
+          EVENT_NAME: dispatch
           IMAGE_TAG: ${{ github.event.inputs.tag }}
           GOERLI: apps/dummy-dev/overlays/dummy-dev-1/config.yml
           GOERLI2: apps/juno-dev/overlays/dev-goerli-2/config.yaml
@@ -99,7 +99,7 @@ jobs:
     steps:
       - name: Repository Dispatch Dev
         env:
-          EVENT_NAME: juno-dev
+          EVENT_NAME: dispatch
           IMAGE_TAG: ${{ github.event.inputs.tag }}
           GOERLI: apps/juno-dev/overlays/dev-goerli-1/config.yaml
           GOERLI2: apps/juno-dev/overlays/dev-goerli-2/config.yaml
