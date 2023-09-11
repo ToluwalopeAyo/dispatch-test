@@ -1,0 +1,30 @@
+name: Workflow Dispatch Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Enter an image tag e.g v0.1.0'
+        required: true
+      repo_type:
+        description: 'Choose repository type'
+        type: choice
+        required: false
+        default: 'non-official'
+        options:
+        - official
+        - non-official
+
+jobs:
+  workflow_dispatch_test_dev:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+  
+    - name: Workflow Dispactch
+      uses: benc-uk/workflow-dispatch@v1
+      with: 
+        workflow: Repository Dispatch Test
+        token: ${{ secrets.ACCESS_TOKEN }}
+        inputs: '{"tag": ${{ github.event.inputs.tag }}}'

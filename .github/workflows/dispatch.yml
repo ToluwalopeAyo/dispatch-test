@@ -1,9 +1,10 @@
 name: Repository Dispatch Test
 
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Docker Image Tag to be deployed
 
 env: 
   EVENT_NAME: dispatch
@@ -23,7 +24,7 @@ jobs:
     steps:          
       - name: Repo dispatch test
         env:
-          IMAGE_TAG: ${{ github.sha }}
+          IMAGE_TAG: ${{ github.event.inputs.tag }}
         run: |
           curl -L \
           -X POST \
