@@ -27,4 +27,4 @@ jobs:
       with: 
         workflow: Repository Dispatch Test
         token: ${{ secrets.ACCESS_TOKEN }}
-        inputs: '{"tag": ${{ github.event.inputs.tag }}}'
+        inputs: '{"tag": "${{ github.event.inputs.tag }}"}'
