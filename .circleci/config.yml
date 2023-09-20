@@ -25,7 +25,7 @@ jobs:
       - checkout
       - run:
           name: "Define-image-tag"
-          command: echo "DOCKER_IMAGE_TAG=$(git describe --tags)" >> $IMAGE_TAG
+          command: echo "DOCKER_IMAGE_TAG=$(git describe --tags)" >> "$IMAGE_TAG"
       - setup_remote_docker:
           docker_layer_caching: true
       - run: |
