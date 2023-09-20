@@ -27,14 +27,13 @@ jobs:
           name: "Define-image-tag"
           command: | 
             echo 'export DOCKER_IMAGE_TAG="$(git describe --tags)"' >> $BASH_ENV
-            echo $BASH_ENV
             source $BASH_ENV
       - setup_remote_docker:
           docker_layer_caching: true
       - run: |
           docker build -t tolulopeayo/ci-test:$DOCKER_IMAGE_TAG .
           echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-          docker push tolulopeayo/ci-test:$IMAGE-TAG
+          docker push tolulopeayo/ci-test:$DOCKER_IMAGE_TAG
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
