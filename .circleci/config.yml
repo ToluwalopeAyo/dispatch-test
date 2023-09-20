@@ -25,11 +25,11 @@ jobs:
       - checkout
       - run:
           name: "Define-image-tag"
-          command: echo "DOCKER_IMAGE_TAG=$(git describe --tags)" >> $IMAGE-TAG
+          command: echo "DOCKER_IMAGE_TAG=$(git describe --tags)" >> $IMAGE_TAG
       - setup_remote_docker:
           docker_layer_caching: true
       - run: |
-          docker build -t tolulopeayo/ci-test:$IMAGE-TAG .
+          docker build -t tolulopeayo/ci-test:$IMAGE_TAG .
           echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
           docker push tolulopeayo/ci-test:$IMAGE-TAG
 
