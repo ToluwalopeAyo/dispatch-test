@@ -44,4 +44,6 @@ workflows:
   say-hello-workflow:
     jobs:
       - docker-build-and-publish
-      - deploy-dev
+      - deploy-dev:
+          requires:
+            - docker-build-and-publish
