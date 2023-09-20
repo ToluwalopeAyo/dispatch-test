@@ -36,7 +36,8 @@ jobs:
           at: .
       - run: |
           cat bash.env >> $BASH_ENV
-          printenv 
+      - run: |
+          cat bash.env
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
