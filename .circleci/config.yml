@@ -29,7 +29,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run: |
-          docker build -t tolulopeayo/ci-test:$IMAGE-TAG
+          docker build -t tolulopeayo/ci-test:$IMAGE-TAG .
           echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
           docker push tolulopeayo/ci-test:$IMAGE-TAG
 
@@ -38,5 +38,4 @@ jobs:
 workflows:
   say-hello-workflow:
     jobs:
-      - say-hello
       - docker-build-and-publish
