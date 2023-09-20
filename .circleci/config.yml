@@ -26,8 +26,9 @@ jobs:
       - run:
           name: "Define-image-tag"
           command: | 
-            "DOCKER_IMAGE_TAG=${git describe --tags}"
-            echo $DOCKER_IMAGE_TAG
+            echo 'export DOCKER_IMAGE_TAG="$(git describe --tags)"' >> $BASH_ENV
+            echo $BASH_ENV
+            source $BASH_ENV
       - setup_remote_docker:
           docker_layer_caching: true
       - run: |
